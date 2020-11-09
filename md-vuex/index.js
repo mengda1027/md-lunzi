@@ -28,6 +28,21 @@ class Store {
         }
       },
     })
+    // 另一种响应式实现方式
+    // this.vmData = {
+    //   state: Vue.observable(options.state || {}),
+    // }
+    // 初始化 getter
+    this.getters = {}
+    // 实现 getter 访问逻辑
+    Object.keys(options.getters).forEach((key) => {
+      // 将对 state 的访问代理到 this.getter 上
+      Object.defineProperty(this.getters, key, {
+        get: () => {
+          return options.getters[key](this.vmData.state)
+        },
+      })
+    })
   }
   // 实现 state
   get state() {

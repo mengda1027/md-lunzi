@@ -6,7 +6,11 @@ export default new Vuex.Store({
   state: {
     text: "Hello Vuex",
   },
-  getters: {},
+  getters: {
+    getText(state) {
+      return state.text.replace("State", "Getters")
+    },
+  },
   mutations: {},
   actions: {},
   modules: {},
