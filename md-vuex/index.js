@@ -32,11 +32,12 @@ class Store {
     // this.vmData = {
     //   state: Vue.observable(options.state || {}),
     // }
-    // 初始化 getter
+    // 初始化 getter, function[]
     this.getters = {}
     // 实现 getter 访问逻辑
     Object.keys(options.getters).forEach((key) => {
-      // 将对 state 的访问代理到 this.getter 上
+      // 将对 this.getter 的访问代理到 options.getters 上, 简化书写方式 this.$store.getters.getText -> getStateByGetters
+      // this.$store.getters.getText
       Object.defineProperty(this.getters, key, {
         get: () => {
           return options.getters[key](this.vmData.state)

@@ -8,7 +8,7 @@ Function.prototype.myBind = function (thisArg) {
   // 设置返回的一个新方法
   const result = function () {
     // 获取返回方法体的参数
-    const resultArg = [...arguments]
+    const resultArg = [...arguments] // 新传入的参数
 
     // 如果是通过 new 调用的，绑定 this 为实例对象; 此时为 {}
     if (this instanceof result) {
@@ -40,4 +40,6 @@ const bindFn = fn.myBind(ctxOb)
 fn() // 1
 bindFn() // 2
 
-// new bindFn()
+const b = new bindFn()
+console.log(b instanceof bindFn) // true
+console.log(b instanceof fn) // true
